@@ -52,10 +52,6 @@ export class CampagneEditComponent implements OnInit {
       if(campaign.length > 0) {
         this.campaign = campaign[0];
       }
-
-      console.log('kkkkkkkkk')
-      console.log(this.campaign);
-     // this.initForm();
     })
   }
 
@@ -75,35 +71,26 @@ export class CampagneEditComponent implements OnInit {
       }
     });
 
-    console.log('---------media')
-    console.log(this.medias);
   }
 
   getBrands() {
     this.campaignService.getAllBrands().subscribe(response => {
         this.brands = response;
-        console.log('---------brands')
-        console.log(this.brands);
     });
   }
 
   onCheckboxChange($event, element) {
-    console.log($event);
     if($event.checked) {
       this.mediasSelected.push(element);
     } else {
       this.mediasSelected = this.mediasSelected.filter(item => item.mediaId !== element.mediaId);
     }
-    
-    console.log(this.mediasSelected);
   }
 
   submitForm() {
 
     this.campaignForm.value;
     this.campaign.media = this.mediasSelected;
-
-    console.log(this.campaign);
   }
 
 }

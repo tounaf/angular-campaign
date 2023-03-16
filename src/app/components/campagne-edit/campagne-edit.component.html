@@ -24,15 +24,21 @@
                   </mat-form-field>
                 
                 <div class="row">
-
-                    <mat-checkbox class="col-md-3" *ngFor="let media of medias" (change)="onCheckboxChange($event, media)">
-                        {{ media.name }}
-                      </mat-checkbox>
+                    <div class="col-md-6 offset-md-0">
+                            <mat-label>Media</mat-label>
+                    </div>
+                    
+                    <div class="col-md-8">
+                            <mat-checkbox [checked]="media.mediaId === campaign.media.mediaId" class="col-md-3" *ngFor="let media of medias" (change)="onCheckboxChange($event, media)">
+                                  {{ media.name }}
+                            </mat-checkbox>
+                    </div>
+                    
                       
                 </div>
 
                 <div class="col-offset-1 col-md-3">
-                    <button mat-raised-button color="primary" (click)="submitForm()">Filter</button>
+                    <button mat-raised-button color="primary" (click)="submitForm()">Save</button>
                 </div>
                 
             </div>

@@ -47,7 +47,6 @@ export class CampagneListComponent implements OnInit {
     this.campaignService.getAllCampaigns().subscribe((response) => {
       this.campaigns = response;
       this.dataSource = new MatTableDataSource<any>(response.requests);
-        console.log(response);
     });
   }
 
