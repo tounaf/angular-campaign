@@ -20,6 +20,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+import { MatNativeDateModule } from '@angular/material/core';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatExpansionModule, MatProgressSpinnerModule, MatFormFieldModule,
   MatInputModule,
@@ -38,6 +42,7 @@ import {InjectTokenInterceptor} from './interceptors/inject-token-interceptor';
 import {LoaderService} from './service/loader.service';
 import { LoginModule } from './login/login.module';
 import { CampagneListComponent } from './components/campagne-list/campagne-list.component';
+import { CampagneEditComponent } from './components/campagne-edit/campagne-edit.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +50,7 @@ import { CampagneListComponent } from './components/campagne-list/campagne-list.
     DashboardComponent,
     NavComponent,
     CampagneListComponent,
+    CampagneEditComponent,
   ],
   imports: [
     LoginModule,
@@ -79,6 +85,9 @@ import { CampagneListComponent } from './components/campagne-list/campagne-list.
     MatCardModule,
     MatIconModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule,
     // FlowerSpinnerModule,
     // FulfillingBouncingCircleSpinnerModule
     // TrinityRingsSpinnerModule,

@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {HttpClientService} from '../../service/http-client.service';
 
+import { CampaignService } from "../../service/campaign.service";
+
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campagne-list',
@@ -24,7 +27,9 @@ export class CampagneListComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private http: HttpClient, 
-    private httpClient: HttpClientService
+    private httpClient: HttpClientService,
+    private router: Router,
+    private campaignService: CampaignService
   ) { }
   
   ngOnInit() {
@@ -33,32 +38,13 @@ export class CampagneListComponent implements OnInit {
       brand: '',
     });
 
-    /*this.dataSource = new MatTableDataSource<any>([
-      {
-        requestStatus: {
-          requestStatusId: 4,
-          name: "TO_MODIFY",
-          value: "To modify",
-          step: 1
-        },
-         campaignName: 'Test name', 
-         advice: true, 
-         brand: {
-           brandId: 12,
-          name: "Brand 12"
-        }, 
-        submittedDate: '2020-06-19T12:09:26.6666667+00:00'
-      }
-    ]);*/
-
-    this.displayedColumns = ['requestStatus', 'campaignName', 'advice', 'brand', 'submittedDate'];
+    this.displayedColumns = ['requestStatus', 'campaignName', 'advice', 'brand', 'submittedDate','actions'];
     this.getAllBrands();
     this.getAllCampaigns();
-    console.log(this.dataSource);
   }
 
   getAllCampaigns() {
-    this.httpClient.get(this.url).subscribe((response) => {
+    this.campaignService.getAllCampaigns().subscribe((response) => {
       this.campaigns = response;
       this.dataSource = new MatTableDataSource<any>(response.requests);
         console.log(response);
@@ -66,9 +52,8 @@ export class CampagneListComponent implements OnInit {
   }
 
   getAllBrands() {
-    this.httpClient.get(this.brandUrl).subscribe((response) => {
+    this.campaignService.getAllBrands().subscribe((response) => {
         this.brands = response;
-        console.log(response);
     });
   }
 
@@ -76,13 +61,8 @@ export class CampagneListComponent implements OnInit {
 
     //const data = JSON.stringify(this.campaignForm.value);
     const data = this.campaignForm.value;
-    console.log(data);
     //@ts-ignore
     const campaigns = this.campaigns.requests.filter((c) => {
-      console.log(c.campaignName.includes(data.name) || c.brand.brandId === data.brand);
-      console.log('================')
-      console.log('name : ' + c.campaignName + ', ' + data.name );
-      console.log('brand :' + c.brand.brandId +  ', ' + data.brand);
       let foundName = false;
       if(data.name !== '') {
         foundName = c.campaignName.includes(data.name);
@@ -94,13 +74,9 @@ export class CampagneListComponent implements OnInit {
       return foundName || foundBrand;
         
     })
+
     this.dataSource = new MatTableDataSource<any>(campaigns);
-    return;
-    this.httpClient.pos('/products', data).subscribe(
-      (response) => {
-        console.log(response);
-      }
-    )
+    
   }
 
   resetForm() {
@@ -110,6 +86,10 @@ export class CampagneListComponent implements OnInit {
     });
 
     this.getAllCampaigns();
+  }
+
+  editCampaign(campaign: any) {
+    this.router.navigate(['/campagne/edit', campaign.requestId]);
   }
 
 }

@@ -1,0 +1,42 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>All Request</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="campaignForm">
+            <div class="row">
+                <mat-form-field class="col-md-4" >
+                    <input matInput placeholder="Campagne name" formControlName="campaignName" [(ngModel)]="campaign.campaignName">
+                </mat-form-field>
+                <mat-form-field class="col-md-4">
+                    <mat-label>Brand</mat-label>
+                    <mat-select formControlName="brand"  [(ngModel)]="campaign?.brand.brandId">
+                        <mat-option *ngFor="let brand of brands" [value]="brand.brandId">{{brand.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+
+                <mat-form-field class="col-md-3">
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+                     [(ngModel)]="campaign.decisionDeadline" [ngModelOptions]="{standalone: true}">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                
+                <div class="row">
+
+                    <mat-checkbox class="col-md-3" *ngFor="let media of medias" (change)="onCheckboxChange($event, media)">
+                        {{ media.name }}
+                      </mat-checkbox>
+                      
+                </div>
+
+                <div class="col-offset-1 col-md-3">
+                    <button mat-raised-button color="primary" (click)="submitForm()">Filter</button>
+                </div>
+                
+            </div>
+        </form>
+        
+    </mat-card-content>
+</mat-card>
