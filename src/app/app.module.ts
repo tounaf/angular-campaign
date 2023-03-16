@@ -19,6 +19,7 @@ import { NavComponent } from './nav/nav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatExpansionModule, MatProgressSpinnerModule, MatFormFieldModule,
   MatInputModule,
@@ -36,12 +37,14 @@ import {
 import {InjectTokenInterceptor} from './interceptors/inject-token-interceptor';
 import {LoaderService} from './service/loader.service';
 import { LoginModule } from './login/login.module';
+import { CampagneListComponent } from './components/campagne-list/campagne-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     NavComponent,
+    CampagneListComponent,
   ],
   imports: [
     LoginModule,
@@ -75,6 +78,7 @@ import { LoginModule } from './login/login.module';
     MatGridListModule,
     MatCardModule,
     MatIconModule,
+    MatTableModule,
     // FlowerSpinnerModule,
     // FulfillingBouncingCircleSpinnerModule
     // TrinityRingsSpinnerModule,

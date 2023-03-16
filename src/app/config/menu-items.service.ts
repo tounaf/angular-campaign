@@ -12,16 +12,11 @@ export const MenuItems: Menu[] = [
   {
     path: ['#'],
     icon: 'settings',
-    label: 'Setting',
+    label: 'CAMPAGNES',
     child: [
       {
-        path: ['/', Route.type_produit, Route.list],
-        label: 'Type produit',
-        icon: '',
-      },
-      {
-        path: ['/', Route.user, Route.list],
-        label: 'Utilisateur',
+        path: ['/', Route.campagne, Route.list],
+        label: 'Liste',
         icon: '',
       }
     ]

@@ -25,10 +25,6 @@ export class AppComponent implements OnInit, AfterContentInit {
     //if(isNullOrUndefined(this.currentUser)) {
      // this.router.navigateByUrl('login');
     //}
-    this.httpClient.get('/api/sites').subscribe((resp) => {
-      const data = resp;
-      console.log(data);
-    });
   }
 
   ngAfterContentInit() {
